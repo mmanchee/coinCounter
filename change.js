@@ -47,13 +47,37 @@
 function changeFinder(coinValue) {
     return function(amount) {
       const count = Math.floor(amount / coinValue);
-      const remain = amount%coinValue; 
-        return `${count} and ${remain} remaining`;
+      //const remain = amount%coinValue; 
+        // return `${count} and ${remain} remaining`;
+        return count;
     }
 }
-const input = 167;
+const input = 1.67;
 const quarter = changeFinder(25);
 const dime = changeFinder(10);
 const nickle = changeFinder(5);
 const penny = changeFinder(1);
-console.log(`In quarters = ${quarter(input)}, In dimes = ${dime(input)}, In nickles = ${nickle(input)}, In pennies = ${penny(input)}`);
+// console.log(`In quarters = ${quarter(input)}, In dimes = ${dime(input)}, In nickles = ${nickle(input)}, In pennies = ${penny(input)}`);
+
+const coinArray = [quarter, dime, nickle, penny]
+// const amount = input;
+function changeSorter(amount) {
+    const cents = (amount * 100);
+    const array = coinArray.map(function(e) {
+      const coinAmount = e(cents);
+      const coinValue = Math.floor(cents / coinAmount)
+      if(coinValue >25) {
+        coin =25
+      }
+      else if (coinValue >10) {
+        coin = 10
+      }
+      else if (coinValue >5) {
+        coin = 5
+      }
+      cents = (cents % coinValue)
+      return 
+    })
+    return array;
+}
+console.log(changeSorter(input));
